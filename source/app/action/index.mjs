@@ -309,7 +309,7 @@ async function wait(seconds) {
       info("Actions to perform", "(none)")
     else {
       await fs.mkdir(paths.dirname(paths.join("/renders", filename)), {recursive:true})
-      await fs.writeFile(paths.join("/renders", filename), Buffer.from(rendered))
+      await fs.writeFile(paths.join("/renders", filename), Buffer.from(typeof rendered === "object" ? JSON.stringify(rendered) : `${rendered}`))
       info(`Save to /metrics_renders/${filename}`, "ok")
     }
 
@@ -377,7 +377,7 @@ async function wait(seconds) {
         ...github.context.repo,
         path:filename,
         message:committer.message,
-        content:Buffer.from(rendered).toString("base64"),
+        content:Buffer.from(typeof rendered === "object" ? JSON.stringify(rendered) : `${rendered}`).toString("base64"),
         branch:committer.pr ? committer.head : committer.branch,
         ...(committer.sha ? {sha:committer.sha} : {}),
       })

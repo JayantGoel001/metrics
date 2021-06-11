@@ -68,20 +68,18 @@ placeholder.run = async vars => {
 }
 
 //Setup
-beforeAll(async done => {
+beforeAll(async () => {
   //Clean community template
   await fs.promises.rmdir(path.join(__dirname, "../source/templates/@classic"), { recursive: true })
   //Start web instance
   await web.start()
-  done()
 })
 //Teardown
-afterAll(async done => {
+afterAll(async () => {
   //Stop web instance
   await web.stop()
   //Clean community template
   await fs.promises.rmdir(path.join(__dirname, "../source/templates/@classic"), { recursive: true })
-  done()
 })
 
 //Load metadata (as jest doesn't support ESM modules, we use this dirty hack)
@@ -99,12 +97,12 @@ const tests = []
 for (const name in metadata.plugins) {
   const cases = yaml
     .load(fs.readFileSync(path.join(__dirname, "../source/plugins", name, "tests.yml"), "utf8"))
-    .map(({ name: test, with: inputs, modes = [], timeout }) => {
+    ?.map(({ name: test, with: inputs, modes = [], timeout }) => {
       const skip = new Set(Object.entries(metadata.templates).filter(([_, { readme: { compatibility } }]) => !compatibility[name]).map(([template]) => template))
       if (!(metadata.plugins[name].supports.includes("repository")))
         skip.add("repository")
       return [test, inputs, { skip: [...skip], modes, timeout }]
-    })
+    }) ?? []
   tests.push(...cases)
 }
 
