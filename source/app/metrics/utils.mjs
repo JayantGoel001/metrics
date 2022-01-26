@@ -455,11 +455,11 @@ export const svg = {
           console.debug(`animations are ${animated ? "enabled" : "disabled"}`)
           await new Promise(solve => setTimeout(solve, 2400))
           //Get bounds and resize
-          let {y:height, width} = document.querySelector("svg #metrics-end").getBoundingClientRect()
-          console.debug(`bounds width=${width}, height=${height}`)
+          let {height, width} = document.querySelector(".items-wrapper").getBoundingClientRect()
+          console.log(`bounds width=${width}, height=${height}`)
           height = Math.ceil(height * padding.height + padding.absolute.height)
           width = Math.ceil(width * padding.width + padding.absolute.width)
-          console.debug(`bounds after applying padding width=${width} (*${padding.width}+${padding.absolute.width}), height=${height} (*${padding.height}+${padding.absolute.height})`)
+          console.log(`bounds after applying padding width=${width} (*${padding.width}+${padding.absolute.width}), height=${height} (*${padding.height}+${padding.absolute.height})`)
           //Resize svg
           if (document.querySelector("svg").getAttribute("height") === "auto")
             console.debug('skipped height resizing because it was set to "auto"')
