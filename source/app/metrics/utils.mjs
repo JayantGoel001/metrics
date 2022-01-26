@@ -455,7 +455,7 @@ export const svg = {
           console.debug(`animations are ${animated ? "enabled" : "disabled"}`)
           await new Promise(solve => setTimeout(solve, 2400))
           //Get bounds and resize
-          let {y:height, width} = document.querySelector("svg #metrics-end").getBoundingClientRect()
+          let {height, width} = document.querySelector(".items-wrapper").getBoundingClientRect()
           console.debug(`bounds width=${width}, height=${height}`)
           height = Math.ceil(height * padding.height + padding.absolute.height)
           width = Math.ceil(width * padding.width + padding.absolute.width)
