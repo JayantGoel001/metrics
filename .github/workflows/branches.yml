@@ -1,7 +1,7 @@
 name: Check automated branches
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - main
       - latest
@@ -10,13 +10,14 @@ on:
 jobs:
   notice:
     name: Notice for automated branches
+    runs-on: ubuntu-latest
     steps:
       - name: Comment on pull request
         uses: actions/github-script@v5
         with:
           script: |
             const {issue:{number:issue_number}, repo:{owner, repo}} = context
-            github.issues.createComment({issue_number, owner, repo, body:[
+            github.rest.issues.createComment({issue_number, owner, repo, body:[
               "Hello there 👋!",
               "",
               "It seems you have opened a pull request on either `main`, `latest` or `examples`.",
@@ -27,3 +28,5 @@ jobs:
               "",
               "Thanks for your cooperation 🦾!"
             ].join("\n")})
+      - name: Change base branch
+        run: exit 1
