@@ -93,6 +93,11 @@
         }
         finally {
           this.pending = false
+          try {
+            const { data: requests } = await axios.get("/.requests")
+            this.requests = requests
+          }
+          catch {}
         }
       },
     },
@@ -142,6 +147,10 @@
       preview() {
         return /-preview$/.test(this.version)
       },
+      rlreset() {
+        const reset = new Date(Math.max(this.requests.graphql.reset, this.requests.rest.reset))
+        return `${reset.getHours()}:${reset.getMinutes()}`
+      },
     },
     //Data initialization
     data: {
@@ -151,7 +160,7 @@
       embed: false,
       localstorage: false,
       searchable: false,
-      requests: { limit: 0, used: 0, remaining: 0, reset: 0 },
+      requests: { rest: { limit: 0, used: 0, remaining: 0, reset: NaN }, graphql: { limit: 0, used: 0, remaining: 0, reset: NaN } },
       palette: "light",
       metrics: null,
       pending: false,
