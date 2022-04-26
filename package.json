@@ -1,6 +1,6 @@
 {
   "name": "metrics",
-  "version": "3.23.0-beta",
+  "version": "3.23.0",
   "description": "An infographics generator with 30+ plugins and 200+ options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON!",
   "main": "index.mjs",
   "scripts": {
@@ -29,21 +29,21 @@
   },
   "homepage": "https://github.com/lowlighter/metrics#readme",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.7.0",
     "@actions/github": "^5.0.1",
     "@faker-js/faker": "^6.0.0-alpha.3",
     "@octokit/graphql": "^4.8.0",
     "@octokit/rest": "^18.12.0",
     "@primer/css": "^19.8.2",
     "@primer/octicons": "^17.0.0",
-    "axios": "^0.26.1",
+    "axios": "^0.27.1",
     "clipboard": "^2.0.10",
     "compression": "^1.7.4",
     "csso": "^5.0.3",
     "ejs": "^3.1.7",
     "emoji-name-map": "^1.2.9",
     "express": "^4.17.3",
-    "express-rate-limit": "^6.3.0",
+    "express-rate-limit": "^6.4.0",
     "jimp": "^0.16.1",
     "js-yaml": "^4.1.0",
     "linguist-js": "^2.4.2",
@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "eslint": "^8.14.0",
-    "jest": "^27.5.1",
+    "jest": "^28.0.0",
     "libxmljs2": "^0.29.0",
     "nodemon": "^2.0.15"
   },
