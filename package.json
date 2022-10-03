@@ -30,7 +30,7 @@
   "homepage": "https://github.com/lowlighter/metrics#readme",
   "dependencies": {
     "@actions/core": "^1.9.1",
-    "@actions/github": "^5.0.3",
+    "@actions/github": "^5.1.1",
     "@faker-js/faker": "^7.4.0",
     "@googlemaps/google-maps-services-js": "^3.3.16",
     "@octokit/graphql": "^5.0.1",
