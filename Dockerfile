@@ -1,5 +1,5 @@
 # Base image
-FROM node:20-bookworm-slim
+FROM node:20-bookworm-slim as build
 
 # Copy repository
 COPY . /metrics
@@ -18,8 +18,9 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   # Install deno for miscellaneous scripts
   && apt-get install -y curl unzip \
   && curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=/usr/local sh \
-  # Install ruby to support github licensed gem
-  && apt-get install -y ruby-full git g++ cmake pkg-config libssl-dev \
+  # Install ruby and required build dependencies to support github licensed gem (nokogiri needs system libraries)
+  && apt-get install -y ruby-full git g++ make cmake pkg-config libssl-dev libxml2-dev libxslt1-dev zlib1g-dev \
+  && gem install nokogiri --platform=ruby -- --use-system-libraries \
   && gem install licensed \
   # Install python for node-gyp
   && apt-get install -y python3 \
